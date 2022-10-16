@@ -7,11 +7,13 @@ def combine_audio_files(files: list, outfile: str = "sounds.wav"):
         first_file = outfile
 
 def combine_two_files(files: list, outfile: str = "sounds.wav"):
-    print(files)
-
     data= []
     for infile in files:
-        w = wave.open(infile, 'rb')
+        try:
+            w = wave.open(infile, 'rb')
+        except:
+            w = wave.open('.empty.vav', 'rb')
+
         data.append( [w.getparams(), w.readframes(w.getnframes())] )
         w.close()
 
@@ -20,4 +22,5 @@ def combine_two_files(files: list, outfile: str = "sounds.wav"):
     output.writeframes(data[0][1])
     output.writeframes(data[1][1])
     output.close()
-    print("Result in", outfile)
+
+

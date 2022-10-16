@@ -11,6 +11,7 @@ class ModelInfo():
     language: str
     device: str
     sample_rate: int
+    speakers: list
     
 
 
@@ -100,9 +101,10 @@ class SpeakerModel:
                     languages=self.languages,
                     language=self.lang,
                     device=self.device.value,
-                    sample_rate=self.sample_rate)
+                    sample_rate=self.sample_rate,
+                    speakers=self.speakers)
 
-    def text2speech(self, text: str, filename: str, speaker: str = None) -> str: 
+    def text2speech(self, text: str, filename: str, speaker: str = None) -> None: 
         audio = self.model.apply_tts(text=text,
                                 speaker=speaker or self.speaker,
                                 sample_rate=self.sample_rate,
@@ -113,5 +115,3 @@ class SpeakerModel:
 
         with open(filename, 'wb') as f:
             f.write(a.data)
-
-        return 'RES'
