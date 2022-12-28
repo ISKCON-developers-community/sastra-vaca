@@ -32,6 +32,6 @@ for i, p in enumerate(paragraphs):
         print(p)
     combine_two_files([audio_filename, "temp.wav"], audio_filename)
 
-easygui.msgbox("Process was finished", "Test-to-speech")
+easygui.msgbox("Process was finished", "Text-to-speech")
 
 

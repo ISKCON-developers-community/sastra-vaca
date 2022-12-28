@@ -12,7 +12,7 @@ class Files:
     path: str
     
 
-def get_separated_text_from_file(file: Files) -> list[str]:
+def get_separated_text_from_file(file: Files, repl_dict=None) -> list[str]:
     new_list = []
     if file.type == PathType.FILE:
         files = [file.path]
@@ -31,9 +31,10 @@ def get_separated_text_from_file(file: Files) -> list[str]:
                 else:
                     new_list.append(t)
 
-    return new_list
+    return replace_by_dict(new_list, repl_dict) if repl_dict else new_list
 
 
-
+def replace_by_dict(paragraphs: list[str], repl_dict: dict) -> list[str]:
+    return paragraphs
 
 
