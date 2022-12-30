@@ -31,7 +31,11 @@ output_audio_filename = easygui.enterbox("Specify outpyt file name") or ""
 speaker = easygui.choicebox("Select voice", "", info.speakers)
 
 for i, file in enumerate(files):
-    paragraphs = get_separated_text_from_file(file)
+    try:
+        paragraphs = get_separated_text_from_file(file)
+    except Exception as e:
+        print("Aborting program couse file can't be opened")
+        exit()
 
     if len(files) == 1 and output_audio_filename:
         audio_filename = f"{output_audio_filename}.wav"
@@ -43,8 +47,8 @@ for i, file in enumerate(files):
         print("Processing...", f"File {i+1}/{len(files)} paragraph {j+1}/{len(paragraphs)}")
         try:
             tts.text2speech(p, "temp.wav", speaker=speaker)
-        except Exception:
-            print(p)
+        except Exception as e:
+            print(e)
         combine_two_files([audio_filename, "temp.wav"], audio_filename)
 
 easygui.msgbox("Process was finished", "Text-to-speech")
