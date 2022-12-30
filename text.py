@@ -1,6 +1,5 @@
 def get_separated_text_from_file(file: str, repl_dict=None) -> list[str]:
     new_list = []
-    print("FILE", file)
     with open(file, "r") as f:
         text = f.read()
     text_list = text.split('\n')
