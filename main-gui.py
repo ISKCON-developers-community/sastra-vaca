@@ -1,7 +1,9 @@
 from audio import combine_two_files
-from files import get_txt_files
 from models import SpeakerModel, Device, SampleRate
+import easygui
+import os
 from text import get_separated_text_from_file
+from push import push
 
 tts = SpeakerModel()
 
@@ -12,13 +14,24 @@ tts = SpeakerModel()
 tts.specify_model()
 info = tts.get_model_info()
 
+def get_files() -> list:
+    choice = easygui.buttonbox("Pick an item", "", ["File", "Folder"])
+    if choice == "File":
+        p = easygui.fileopenbox(filetypes=['*.txt'])
+        files = [p]
+    else:
+        p = easygui.diropenbox(msg="Hello", title="Filessss")
+        dir_listing = os.listdir(p)
+        files = [f"{p}/{f}" for f in dir_listing if f.endswith(".txt")]
+    return files
 
-files = get_txt_files()
-output_audio_filename = input("Type outpyt file name: ") or ""
+files = get_files()
+output_audio_filename = easygui.enterbox("Specify outpyt file name") or ""
 
-speaker = input(f"Select voice. Type one of: {'/'.join(info.speakers)} ")
+speaker = easygui.choicebox("Select voice", "", info.speakers)
 
 for i, file in enumerate(files):
+    print(file)
     try:
         paragraphs = get_separated_text_from_file(file)
     except Exception as e:
@@ -39,6 +52,6 @@ for i, file in enumerate(files):
             print(e)
         combine_two_files([audio_filename, "temp.wav"], audio_filename)
 
-print("Process was finished")
+easygui.msgbox("Process was finished", "Text-to-speech")
 
 
