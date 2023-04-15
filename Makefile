@@ -1,5 +1,6 @@
 create:
 	docker build -t sastra-vaca .
+	mkdir files
 
 run:
 	docker run -i -v /home/sasha/Coding/1_python/sastra-vaca/files:/usr/src/app/files --name sastra-vaca-con --rm sastra-vaca
