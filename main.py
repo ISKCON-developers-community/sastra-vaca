@@ -16,7 +16,7 @@ info = tts.get_model_info()
 files = get_txt_files()
 output_audio_filename = input("Type output file name: ") or "audio"
 
-speaker = input(f"Select voice. Type one of: {'/'.join(info.speakers)} ") or info.speakers[0]
+speaker = input(f"Select voice. Type one of: {'/'.join(info.speakers)} :") or info.speakers[0]
 print(f"Selected voice - {speaker}")
 
 for i, file in enumerate(files):
