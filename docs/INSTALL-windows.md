@@ -36,7 +36,7 @@ git clone https://notabug.org/granthin/sastra-vaca.git
 cd sastra-vaca
 ```
 
-(Если notabug недоступен — зеркало: `git@github.com:ISKCON-developers-community/sastra-vaca.git`)
+(Если notabug недоступен — зеркало: `https://github.com/ISKCON-developers-community/sastra-vaca.git`)
 
 ## 4. Создание виртуального окружения и установка зависимостей
 

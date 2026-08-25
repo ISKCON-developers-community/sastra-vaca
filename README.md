@@ -19,7 +19,7 @@ Clone the repo:
 git clone https://notabug.org/granthin/sastra-vaca.git
 cd sastra-vaca
 # or GitHub mirror:
-# git clone git@github.com:ISKCON-developers-community/sastra-vaca.git
+# git clone https://github.com/ISKCON-developers-community/sastra-vaca.git
 ```
 
 Create a virtual environment and install dependencies:
