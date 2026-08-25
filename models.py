@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+from pathlib import Path
 import torch
 from omegaconf import OmegaConf
 from IPython.display import Audio
@@ -17,7 +18,7 @@ class ModelInfo():
 
 class Device(Enum):
     CPU = 'cpu'
-    GPU = 'gpu'
+    GPU = 'cuda'
 
 class SampleRate(Enum):
     HI = 48000
@@ -41,10 +42,11 @@ class SpeakerModel:
     def __get_models(self):
         """Get models from github"""
         try:
-            torch.hub.download_url_to_file(
-                    'https://raw.githubusercontent.com/snakers4/silero-models/master/models.yml',
-                                'latest_silero_models.yml',
-                                progress=False)
+            if not Path('latest_silero_models.yml').exists():
+                torch.hub.download_url_to_file(
+                        'https://raw.githubusercontent.com/snakers4/silero-models/master/models.yml',
+                                    'latest_silero_models.yml',
+                                    progress=False)
         except Exception:
             print("ERROR downloading models. You need internet connection")
             exit()
@@ -63,7 +65,7 @@ class SpeakerModel:
         Accept lenguage, device and
         """
         if lang: self.lang = lang
-        if sample_rate: self.semple_rate = sample_rate.value
+        if sample_rate: self.sample_rate = sample_rate.value
         if device: self.device = device
         if model_id: self.model_id = model_id
         set_device = torch.device(self.device.value)

@@ -49,6 +49,7 @@ for i, file in enumerate(files):
             tts.text2speech(p, "temp.wav", speaker=speaker)
         except Exception as e:
             print(e)
+            continue
         combine_two_files([audio_filename, "temp.wav"], audio_filename)
 
 easygui.msgbox("Process was finished", "Text-to-speech")
